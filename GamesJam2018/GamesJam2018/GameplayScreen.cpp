@@ -4,7 +4,7 @@
 
 GameplayScreen::GameplayScreen()
 {
-
+	loadTextures();
 }
 
 
@@ -37,6 +37,18 @@ void GameplayScreen::render(sf::RenderWindow & t_window)
 
 void GameplayScreen::processEvents(sf::Event & t_event)
 {
+}
+
+void GameplayScreen::loadTextures()
+{
+	if (!wallSpriteSheet[0].loadFromFile("./ASSETS/IMAGES/wall1.png"))
+	{
+		std::cout << "Error Loading Texture" << std::endl;
+	}
+	if (!wallSpriteSheet[1].loadFromFile("./ASSETS/IMAGES/wall2.png"))
+	{
+		std::cout << "Error Loading Texture" << std::endl;
+	} 
 }
 
 void GameplayScreen::handleControllerInput()

@@ -4,7 +4,7 @@
 #include <SFML\Graphics.hpp>
 
 #include "game.h"
-
+#include "Wall.h"
 #include "Player.h"
 
 class Game;
@@ -20,6 +20,8 @@ public:
 	void processEvents(sf::Event & t_event);
 
 private:
+	void loadTextures();
+
 	static const int NUMBER_OF_PLAYERS = 2;
 
 	Player m_player[NUMBER_OF_PLAYERS];
@@ -29,6 +31,8 @@ private:
 	Controller m_controller;
 
 	void handleControllerInput();
+
+	sf::Texture wallSpriteSheet[2];
 };
 
 #endif // !GAMEPLAYSCREEN_H
