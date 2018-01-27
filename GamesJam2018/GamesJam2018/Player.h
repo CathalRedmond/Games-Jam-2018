@@ -14,7 +14,7 @@ public:
 	
 	void update(Controller & t_controller);
 	void render(sf::RenderWindow & t_window);
-
+	sf::RectangleShape getSprite();
 	void collisionDetection(Wall & m_wall);
 private:
 

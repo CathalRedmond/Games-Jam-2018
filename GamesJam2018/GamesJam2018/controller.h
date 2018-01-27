@@ -61,7 +61,7 @@ public:
 
 	Controller();
 	~Controller();
-	void Controller::update();
+	void update();
 	bool isConnected();
 	bool connect();
 

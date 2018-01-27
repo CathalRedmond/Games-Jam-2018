@@ -9,7 +9,7 @@ Player::Player()
 {
 	position = sf::Vector2f(ScreenSize::s_width / 2.0f, ScreenSize::s_width / 2.0f);
 	previousePosition = position;
-	playerShape.setSize(sf::Vector2f(100, 100));
+	playerShape.setSize(sf::Vector2f(50, 50));
 	playerShape.setFillColor(sf::Color::Cyan);
 	playerShape.setOrigin(playerShape.getGlobalBounds().width / 2.0f, playerShape.getGlobalBounds().height / 2.0f);
 	playerShape.setPosition(position);
@@ -41,7 +41,7 @@ void Player::update(Controller & t_controller)
 	playerShape.setPosition(position);
 	playerShape.setRotation(rotationAngle);
 
-
+	
 }
 
 void Player::render(sf::RenderWindow & t_window)
@@ -50,18 +50,21 @@ void Player::render(sf::RenderWindow & t_window)
 	t_window.draw(playerShape);
 }
 
+sf::RectangleShape Player::getSprite()
+{
+	return sf::RectangleShape(playerShape);
+}
+
 void Player::collisionDetection(Wall & m_wall)
 {
 	if (playerShape.getGlobalBounds().intersects(m_wall.getSize().getGlobalBounds()))
 	{
 		hit = true;
-		std::cout << "HIT" << std::endl;
 	}
 	
 	else
 	{
 		hit = false; 
-		std::cout << "NO HIT" << std::endl;
 	}
 }
 

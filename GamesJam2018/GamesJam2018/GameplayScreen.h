@@ -6,6 +6,8 @@
 #include "game.h"
 #include "Wall.h"
 #include "Player.h"
+#include "button.h"
+#include "pressurePlates.h"
 
 class Game;
 
@@ -33,8 +35,13 @@ private:
 	void handleControllerInput();
 
 	sf::Texture wallSpriteSheet[2];
+	sf::Texture buttonTexture[2];
+	sf::Texture plateTexture[2];
 
 	Wall m_wall;
+
+	button m_button;
+	pressurePlates m_plate;
 };
 
 #endif // !GAMEPLAYSCREEN_H

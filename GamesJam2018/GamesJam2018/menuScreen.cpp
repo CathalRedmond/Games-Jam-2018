@@ -29,7 +29,7 @@ void menuScreen::update()
 		m_menuSprite.setTexture(m_menuTextureB);
 	}
 	if (m_controller.m_currentState.A && m_timer > 300)
-	
+	{
 		std::cout << "TO HERE?";
 		m_currentScreen = currentScreen::Gameplay;
 	}
