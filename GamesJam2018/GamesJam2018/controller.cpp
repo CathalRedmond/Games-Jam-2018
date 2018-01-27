@@ -312,8 +312,6 @@ bool Controller::connect()
 		{
 			sf_Joystick_index = index;		// sets index
 			connected = true;
-			std::cout << "XBOX" << std::endl;
-
 		}
 	}
 	return connected;
