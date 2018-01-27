@@ -8,6 +8,9 @@ Game::Game() :
 	m_window( sf::VideoMode{ ScreenSize::s_width, ScreenSize::s_height, 32 }, "SFML Game"),
 	m_exitGame{false} //when true game will exit
 {
+	m_currentScreen = currentScreen::Gameplay;
+	m_gameplayScreen = new GameplayScreen;
+	m_menuScreen = new menuScreen;
 }
 
 
@@ -54,6 +57,17 @@ void Game::processEvents()
 			{
 				m_exitGame = true;
 			}
+			switch(m_currentScreen)
+			{
+			case currentScreen::Gameplay:
+				m_gameplayScreen->processEvents(event);
+				break;
+			case currentScreen::MainMenu:
+				m_menuScreen->processEvents(event);
+				break;
+			default:
+				break;
+			}
 		}
 	}
 }
@@ -68,6 +82,18 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
+
+	switch (m_currentScreen)
+	{
+	case currentScreen::Gameplay:
+		m_gameplayScreen->update();
+		break;
+	case currentScreen::MainMenu:
+		m_menuScreen->update();
+		break;
+	default:
+		break;
+	}
 }
 
 /// <summary>
@@ -76,6 +102,18 @@ void Game::update(sf::Time t_deltaTime)
 void Game::render()
 {
 	m_window.clear(sf::Color::Black);
+
+	switch (m_currentScreen)
+	{
+	case currentScreen::Gameplay:
+		m_gameplayScreen->render(m_window);
+		break;
+	case currentScreen::MainMenu:
+		m_menuScreen->render(m_window);
+		break;
+	default:
+		break;
+	}
 
 	m_window.display();
 }

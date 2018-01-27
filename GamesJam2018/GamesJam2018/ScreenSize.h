@@ -5,9 +5,9 @@
 struct ScreenSize
 {
 public:
-	static const unsigned int s_width{ 1600 };
+	static const unsigned int s_width{ 2000 };
 
-	static const unsigned int s_height{ 1200 };
+	static const unsigned int s_height{ 1500 };
 };
 
 
