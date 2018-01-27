@@ -33,6 +33,8 @@ private:
 	void handleControllerInput();
 
 	sf::Texture wallSpriteSheet[2];
+
+	Wall m_wall;
 };
 
 #endif // !GAMEPLAYSCREEN_H

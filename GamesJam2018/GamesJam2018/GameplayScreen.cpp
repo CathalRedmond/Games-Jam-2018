@@ -5,6 +5,8 @@
 GameplayScreen::GameplayScreen()
 {
 	loadTextures();
+	m_wall.setTexture(wallSpriteSheet[0], wallSpriteSheet[1]);
+
 }
 
 
@@ -23,6 +25,11 @@ void GameplayScreen::update()
 		m_player[1].update(m_controller);
 
 	}
+
+	for (int index = 0; index < NUMBER_OF_PLAYERS; index++)
+	{
+		m_player[index].collisionDetection(m_wall);
+	}
 	m_controller.update();
 	handleControllerInput();
 }
@@ -33,6 +40,7 @@ void GameplayScreen::render(sf::RenderWindow & t_window)
 	{
 		m_player[index].render(t_window);
 	}
+	m_wall.render(t_window);
 }
 
 void GameplayScreen::processEvents(sf::Event & t_event)

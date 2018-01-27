@@ -8,10 +8,12 @@
 class Wall
 {
 public:
-	Wall(sf::Texture & t_wallTexture1, sf::Texture & t_wallTexture2);
+	Wall();
 	~Wall();
 	void render(sf::RenderWindow & t_window);
-
+	void setTexture(sf::Texture const & t_wallTexture1, sf::Texture const & t_wallTexture2);
+	sf::Vector2f getPosition();
+	sf::Sprite getSize();
 private:
 	void setUpSprites();
 
@@ -25,7 +27,7 @@ private:
 	sf::IntRect wallRect[NUMBER_OF_PARTS_OF_THE_WALL];
 
 	static const int TOP_PART = 1;
-	static const int BOTTOM_PART = 2;
+	static const int BOTTOM_PART = 0;
 
 
 	sf::Vector2f wallSize;

@@ -4,6 +4,7 @@
 #include <SFML\Graphics.hpp>
 #include "controller.h"
 #include "ScreenSize.h"
+#include "Wall.h"
 
 class Player
 {
@@ -14,6 +15,7 @@ public:
 	void update(Controller & t_controller);
 	void render(sf::RenderWindow & t_window);
 
+	void collisionDetection(Wall & m_wall);
 private:
 
 	void calculateAngle();
@@ -25,6 +27,7 @@ private:
 	void movement(Controller & t_controller);
 
 	void boundaryCheck();
+	sf::Vector2f previousePosition;
 
 	float radiansToDegrees(float t_radianAngle);
 	
@@ -37,7 +40,7 @@ private:
 
 	sf::Vector2f direction;
 
-
+	bool hit{ false };
 	float rotationAngle;
 
 	sf::RectangleShape playerShape;
