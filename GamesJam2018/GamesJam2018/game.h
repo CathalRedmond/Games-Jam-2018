@@ -28,6 +28,7 @@ private:
 	void render();
 	
 	currentScreen m_currentScreen;
+	currentScreen *m_currentScreenToPass;
 
 	GameplayScreen *m_gameplayScreen;
 
