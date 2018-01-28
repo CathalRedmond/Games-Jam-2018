@@ -51,6 +51,7 @@ private:
 	// textures for the player class
 	sf::Texture playerTexture[2];
 
+	sf::Texture fieldTexture;
 
 	// instance of wall class
 	Wall m_wall;

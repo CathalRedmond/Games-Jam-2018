@@ -10,6 +10,7 @@ public:
 	void setTexture(sf::Texture const & t_fieldTexture);
 	sf::Sprite getSprite();
 	void setPosition(sf::Vector2f t_fieldPosition);
+	void setScale(float x, float y);
 private:
 	void setUpSprites();
 

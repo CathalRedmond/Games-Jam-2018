@@ -9,10 +9,13 @@ GameplayScreen::GameplayScreen()
 	loadTextures();
 
 	m_player[0].setSpawn(sf::Vector2f(900, 1100));
-	m_player[1].setPosition(sf::Vector2f(1100, 1100));
+	m_player[1].setSpawn(sf::Vector2f(1100, 1100));
 	m_wall.setPosition(sf::Vector2f(200,200));
 	m_button.setPosition(sf::Vector2f(1000,200));
 	m_plate.setPosition(sf::Vector2f(1500, 200));
+	m_field.setTexture(fieldTexture);
+	m_field.setScale(10, 10);
+	m_field.setPosition(sf ::Vector2f(50, 50));
 
 	m_player[0].setTexture(playerTexture[0]);
 	m_player[1].setTexture(playerTexture[1]);
@@ -47,6 +50,7 @@ void GameplayScreen::update()
 	for (int index = 0; index < NUMBER_OF_PLAYERS; index++)
 	{
 		m_player[index].collisionDetection(m_wall);
+		m_player[index].collisionDetection(m_field);
 		m_button.collsion(m_player[index]);
 	}
 	m_plate.collsion(m_player[0], m_player[1]);
@@ -64,6 +68,7 @@ void GameplayScreen::render(sf::RenderWindow & t_window)
 {
 	m_button.render(t_window);
 	m_plate.render(t_window);
+	m_field.render(t_window);
 	for (int index = 0; index < NUMBER_OF_PLAYERS; index++)
 	{
 		m_player[index].render(t_window);
@@ -116,6 +121,10 @@ void GameplayScreen::loadTextures()
 	}
 
 	if (!playerTexture[1].loadFromFile("./ASSETS/IMAGES/WomanEmpty.png"))
+	{
+		std::cout << "Error Loading Texture" << std::endl;
+	}
+	if (!fieldTexture.loadFromFile("./ASSETS/IMAGES/FieldTexture.png"))
 	{
 		std::cout << "Error Loading Texture" << std::endl;
 	}

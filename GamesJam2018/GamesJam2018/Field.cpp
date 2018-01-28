@@ -33,6 +33,11 @@ void Field::setPosition(sf::Vector2f t_fieldPosition)
 	m_fieldSprite.setPosition(m_fieldPosition);
 }
 
+void Field::setScale(float x, float y)
+{
+	m_fieldSprite.setScale(sf::Vector2f(x, y));
+}
+
 void Field::setUpSprites()
 {
 	m_fieldSprite.setTexture(m_fieldTexture);

@@ -94,8 +94,10 @@ void Player::collisionDetection(Wall & m_wall)
 
 void Player::collisionDetection(Field & t_field)
 {
+
 	if (m_playerSprite.getGlobalBounds().intersects(t_field.getSprite().getGlobalBounds()))
 	{
+		std::cout << "FIELD HIT";
 		m_position = m_spawnPoint;
 	}
 }
