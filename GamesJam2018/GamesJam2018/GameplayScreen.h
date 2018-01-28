@@ -6,6 +6,7 @@
 #include "game.h"
 #include "Wall.h"
 #include "Player.h"
+#include "Field.h"
 #include "button.h"
 #include "pressurePlates.h"
 
@@ -59,6 +60,8 @@ private:
 
 	// instance of pressure plate class
 	pressurePlates m_plate;
+
+	Field m_field;
 };
 
 #endif // !GAMEPLAYSCREEN_H

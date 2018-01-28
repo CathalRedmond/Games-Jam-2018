@@ -32,7 +32,7 @@ void menuScreen::update()
 		/// </summary>
 		m_timer++;
 	}
-	if (m_timer > 300)
+	if (m_timer > 150)
 	{
 		m_menuSprite.setTexture(m_menuTextureB);
 		m_text.setString("PRESS A TO PLAY");

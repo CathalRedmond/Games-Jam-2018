@@ -6,10 +6,9 @@
 /// </summary>
 GameplayScreen::GameplayScreen()
 {
-
 	loadTextures();
 
-	m_player[0].setPosition(sf::Vector2f(900, 1100));
+	m_player[0].setSpawn(sf::Vector2f(900, 1100));
 	m_player[1].setPosition(sf::Vector2f(1100, 1100));
 	m_wall.setPosition(sf::Vector2f(200,200));
 	m_button.setPosition(sf::Vector2f(1000,200));
