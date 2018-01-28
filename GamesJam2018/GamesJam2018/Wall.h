@@ -13,11 +13,9 @@ public:
 	Wall();
 	~Wall();
 	void render(sf::RenderWindow & t_window);
-	void setTexture(sf::Texture const & t_wallTexture);
-	sf::Sprite getSprite();
-	void setPosition(sf::Vector2f t_wallPosition);
+	void setValues(sf::Texture const & t_wallTexture, sf::Vector2f const & t_wallPosition, sf::Vector2f const & t_scale);
+	sf::Sprite getShape();
 private:
-	void setUpSprites();
 
 	// position of the wall
 	sf::Vector2f m_wallPosition;
@@ -27,6 +25,11 @@ private:
 
 	// wall texture
 	sf::Texture m_wallTexture;
+
+	// scale of wall;
+	sf::Vector2f m_wallScale;
+
+	sf::RectangleShape m_shape;
 
 };
 

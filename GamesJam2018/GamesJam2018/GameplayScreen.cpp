@@ -9,15 +9,14 @@ GameplayScreen::GameplayScreen()
 
 	loadTextures();
 
-	m_player[0].setPosition(sf::Vector2f(900, 1100));
-	m_player[1].setPosition(sf::Vector2f(1100, 1100));
-	m_wall.setPosition(sf::Vector2f(200,200));
+	m_player[0].setPosition(sf::Vector2f(200, 200));
+	m_player[1].setPosition(sf::Vector2f(1800, 1300));
+	setWallsValues();
 	m_button.setPosition(sf::Vector2f(1000,200));
 	m_plate.setPosition(sf::Vector2f(1500, 200));
-
 	m_player[0].setTexture(playerTexture[0]);
 	m_player[1].setTexture(playerTexture[1]);
-	m_wall.setTexture(wallTexture);
+	
 	m_button.setTexture(buttonTexture[0], buttonTexture[1]);
 	m_plate.setTexture(plateTexture[0], plateTexture[1]);
 }
@@ -47,7 +46,13 @@ void GameplayScreen::update()
 	// checks for collision between players and objects
 	for (int index = 0; index < NUMBER_OF_PLAYERS; index++)
 	{
-		m_player[index].collisionDetection(m_wall);
+		for (int index2 = 0; index2 < NUMBER_OF_WALLS; index2++)
+		{
+			if (m_player[index].collisionDetection(m_wall[index2]))
+			{
+				index2 = 10000;
+			}
+		}
 		m_button.collsion(m_player[index]);
 	}
 	m_plate.collsion(m_player[0], m_player[1]);
@@ -63,13 +68,17 @@ void GameplayScreen::update()
 /// <param name="t_window">renderwindow used</param>
 void GameplayScreen::render(sf::RenderWindow & t_window)
 {
+	for (int index = 0; index < NUMBER_OF_WALLS; index++)
+	{
+		m_wall[index].render(t_window);
+	}
 	m_button.render(t_window);
 	m_plate.render(t_window);
 	for (int index = 0; index < NUMBER_OF_PLAYERS; index++)
 	{
 		m_player[index].render(t_window);
 	}
-	m_wall.render(t_window);
+
 }
 
 /// <summary>
@@ -139,4 +148,21 @@ void GameplayScreen::handleControllerInput()
 			player1Active = true;
 		}
 	}
+}
+
+void GameplayScreen::setWallsValues()
+{
+
+
+	m_wall[0].setValues((wallTexture), (sf::Vector2f(25, 25)), (sf::Vector2f(0.125, 0.125)));
+	m_wall[1].setValues((wallTexture), (sf::Vector2f(25, 1475)), (sf::Vector2f(0.125, 0.125)));
+	m_wall[2].setValues((wallTexture), (sf::Vector2f(1975, 25)), (sf::Vector2f(0.125, 0.125)));
+	m_wall[3].setValues((wallTexture), (sf::Vector2f(1975, 1475)), (sf::Vector2f(0.125, 0.125)));
+	m_wall[4].setValues((wallTexture), (sf::Vector2f(1000, 25)), (sf::Vector2f(4.75, 0.125)));
+	m_wall[5].setValues((wallTexture), (sf::Vector2f(1000, 1475)), (sf::Vector2f(4.75, 0.125)));
+	m_wall[6].setValues((wallTexture), (sf::Vector2f(25, 750)), (sf::Vector2f(0.125, 3.5)));
+	m_wall[7].setValues((wallTexture), (sf::Vector2f(1975, 750)), (sf::Vector2f(0.125, 3.5)));
+	m_wall[8].setValues((wallTexture), (sf::Vector2f(1000, 750)), (sf::Vector2f(4.75, 0.125)));
+	m_wall[9].setValues((wallTexture), (sf::Vector2f(1000, 750)), (sf::Vector2f(0.125, 3.5)));
+
 }

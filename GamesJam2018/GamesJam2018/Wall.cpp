@@ -29,10 +29,14 @@ void Wall::render(sf::RenderWindow & t_window)
 /// @brief sets the texture of the wall
 /// </summary>
 /// <param name="t_wallTexture">wall texture</param>
-void Wall::setTexture(sf::Texture const & t_wallTexture)
+void Wall::setValues(sf::Texture const & t_wallTexture, sf::Vector2f const & t_wallPosition, sf::Vector2f const & t_scale)
 {
-	m_wallTexture = t_wallTexture;
- 	setUpSprites();
+
+	m_wallSprite.setTexture(t_wallTexture);
+	m_wallSprite.setScale(t_scale);
+	m_wallSprite.setOrigin(sf::Vector2f(m_wallSprite.getTexture()->getSize().x * 0.5f, m_wallSprite.getTexture()->getSize().y * 0.5f));
+	m_wallSprite.setPosition(t_wallPosition);
+
 }
 
 
@@ -40,27 +44,9 @@ void Wall::setTexture(sf::Texture const & t_wallTexture)
 /// @brief returns wall sprite
 /// </summary>
 /// <returns>wall sprite</returns>
-sf::Sprite Wall::getSprite()
+sf::Sprite Wall::getShape()
 {
 	return m_wallSprite;
 }
 
-/// <summary>
-/// @brief sets wall position
-/// </summary>
-/// <param name="t_wallPosition">new wall position</param>
-void Wall::setPosition(sf::Vector2f t_wallPosition)
-{
-	m_wallPosition = t_wallPosition;
-	m_wallSprite.setPosition(m_wallPosition);
-}
 
-/// <summary>
-/// @brief sets up sprites position
-/// </summary>
-void Wall::setUpSprites()
-{
-		m_wallSprite.setTexture(m_wallTexture);
-		m_wallSprite.setOrigin(m_wallSprite.getGlobalBounds().width / 2.0f, m_wallSprite.getGlobalBounds().height / 2.0f);
-		m_wallSprite.setPosition(m_wallPosition);	
-}

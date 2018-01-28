@@ -59,6 +59,8 @@ void pressurePlates::collsion(Player & t_playersOne, Player & t_playersTwo)
 		m_plateSprite.setTexture(m_plateTexture[PLATE_ON]);
 		m_plateSprite.setOrigin(m_plateSprite.getGlobalBounds().width / 2.0f, m_plateSprite.getGlobalBounds().height / 2.0f);
 		m_plateSprite.setPosition(m_platePosition);
+
+
 	}
 	if ((!m_plateSprite.getGlobalBounds().intersects(t_playersOne.getSprite().getGlobalBounds())) && (!m_plateSprite.getGlobalBounds().intersects(t_playersTwo.getSprite().getGlobalBounds())))
 	{
@@ -66,6 +68,8 @@ void pressurePlates::collsion(Player & t_playersOne, Player & t_playersTwo)
 		m_plateSprite.setTexture(m_plateTexture[PLATE_OFF]);
 		m_plateSprite.setOrigin(m_plateSprite.getGlobalBounds().width / 2.0f, m_plateSprite.getGlobalBounds().height / 2.0f);
 		m_plateSprite.setPosition(m_platePosition);
+
+
 	}
 }
 

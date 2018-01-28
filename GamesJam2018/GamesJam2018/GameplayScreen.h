@@ -25,6 +25,8 @@ public:
 private:
 	void loadTextures();
 	void handleControllerInput();
+	void setWallsValues();
+
 
 	// const for the numnber of players on screen
 	static const int NUMBER_OF_PLAYERS = 2;
@@ -49,10 +51,11 @@ private:
 
 	// textures for the player class
 	sf::Texture playerTexture[2];
+	static const int NUMBER_OF_WALLS = 10;
 
-
+	
 	// instance of wall class
-	Wall m_wall;
+	Wall m_wall[NUMBER_OF_WALLS];
 
 	// instance of button class
 	button m_button;

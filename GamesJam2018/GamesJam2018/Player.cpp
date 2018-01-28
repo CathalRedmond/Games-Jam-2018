@@ -44,6 +44,7 @@ void Player::update(Controller & t_controller)
 	}
 	else	// if touching wall player position changes to previous position
 	{
+		
 		m_position = m_previousPosition;
 	}
 
@@ -74,16 +75,18 @@ sf::Sprite Player::getSprite()
 /// @brief checks for collsion between player and wall
 /// </summary>
 /// <param name="m_wall">wall in the game</param>
-void Player::collisionDetection(Wall & m_wall)
+bool Player::collisionDetection(Wall & m_wall)
 {
-	if (m_playerSprite.getGlobalBounds().intersects(m_wall.getSprite().getGlobalBounds()))
+	if (m_playerSprite.getGlobalBounds().intersects(m_wall.getShape().getGlobalBounds()))
 	{
 		m_hit = true;
+		std::cout << "Ahhh!" << std::endl;
 	}
 	else
 	{
 		m_hit = false; 
 	}
+	return m_hit;
 }
 
 /// <summary>

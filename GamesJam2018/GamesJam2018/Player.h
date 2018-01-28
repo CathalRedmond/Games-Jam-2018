@@ -18,7 +18,7 @@ public:
 	void update(Controller & t_controller);
 	void render(sf::RenderWindow & t_window);
 	sf::Sprite getSprite();
-	void collisionDetection(Wall & t_wall);
+	bool collisionDetection(Wall & t_wall);
 	void setPosition(sf::Vector2f t_playerPosition);
 private:
 	void calculateAngle();
