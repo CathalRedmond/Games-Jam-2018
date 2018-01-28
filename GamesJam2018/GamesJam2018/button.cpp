@@ -82,7 +82,7 @@ void button::setPosition(sf::Vector2f t_buttonPosition)
 void button::setUpSprite()
 {
 	m_buttonSprite.setTexture(m_buttonTexture[BUTTON_OFF]);
-	m_buttonSprite.setOrigin(m_buttonSprite.getGlobalBounds().width / 2.0f, m_buttonSprite.getGlobalBounds().height / 2.0f);
+	m_buttonSprite.setOrigin(m_buttonSprite.getGlobalBounds().width / 2.0f, m_buttonSprite.getGlobalBounds().height);
 	m_buttonSprite.setPosition(m_buttonPosition);
 }
 
@@ -92,5 +92,5 @@ void button::setUpSprite()
 void button::turnButtonOn()
 {
 	m_buttonSprite.setTexture(m_buttonTexture[BUTTON_ON]);
-	m_buttonSprite.setOrigin(m_buttonSprite.getGlobalBounds().width / 2.0f, m_buttonSprite.getGlobalBounds().height / 2.0f);
+	m_buttonSprite.setOrigin(m_buttonSprite.getGlobalBounds().width / 2.0f, m_buttonSprite.getGlobalBounds().height);
 }

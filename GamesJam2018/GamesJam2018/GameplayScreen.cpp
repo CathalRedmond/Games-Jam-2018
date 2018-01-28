@@ -11,11 +11,8 @@ GameplayScreen::GameplayScreen()
 	m_player[0].setPosition(sf::Vector2f(200, 200));
 	m_player[1].setPosition(sf::Vector2f(1800, 1300));
 	setWallsValues();
-	m_button.setPosition(sf::Vector2f(1000,200));
-	m_plate.setPosition(sf::Vector2f(1500, 200));
-	m_field.setTexture(fieldTexture);
-	m_field.setScale(10, 10);
-	m_field.setPosition(sf::Vector2f(50, 50));
+	m_button.setPosition(sf::Vector2f(ScreenSize::s_width * 5/8,ScreenSize::s_height));
+	m_plate.setPosition(sf::Vector2f(ScreenSize::s_width * 1/8, (ScreenSize::s_height/ 2.0f) - 100));
 
 	m_player[0].setTexture(playerTexture[0]);
 	m_player[1].setTexture(playerTexture[1]);
@@ -23,9 +20,25 @@ GameplayScreen::GameplayScreen()
 	m_button.setTexture(buttonTexture[0], buttonTexture[1]);
 	m_plate.setTexture(plateTexture[0], plateTexture[1]);
 	m_bPhone.setTexture(m_bPhoneTexture);
-	m_bPhone.setPosition(sf::Vector2f(100, 0));
+	m_bPhone.setPosition(sf::Vector2f(500, 1125));
+	m_bPhone.setOrigin(m_bPhone.getGlobalBounds().width / 2.0f, m_bPhone.getGlobalBounds().height / 2.0f);
 	m_gPhone.setTexture(m_gPhoneTexture);
-	m_gPhone.setPosition(sf::Vector2f(600, 750));
+	m_gPhone.setPosition(sf::Vector2f(1500, 375));
+	m_gPhone.setOrigin(m_gPhone.getGlobalBounds().width / 2.0f, m_gPhone.getGlobalBounds().height / 2.0f);
+
+
+	m_winButton[0].setTexture(m_winButtonTexture);
+	m_winButton[1].setTexture(m_winButtonTexture);
+
+	m_winButton[0].setPosition(sf::Vector2f(ScreenSize::s_width * 3 / 8, (ScreenSize::s_height / 2.0f) - 300));
+	m_winButton[1].setPosition(sf::Vector2f(ScreenSize::s_width * 5 / 8, (ScreenSize::s_height / 2.0f) + 100));
+
+	m_text.setCharacterSize(64);
+	m_text.setFont(m_font);
+	m_text.setOrigin(m_text.getLocalBounds().width / 2.0f, m_text.getLocalBounds().height / 2.0f);
+
+	m_text.setPosition(ScreenSize::s_width / 2.0f, ScreenSize::s_height / 2.0f);
+	m_text.setFillColor(sf::Color::White);
 }
 
 /// <summary>
@@ -61,13 +74,34 @@ void GameplayScreen::update()
 			}
 		}
 	
-		m_player[index].collisionDetection(m_field);
-		m_button.collsion(m_player[index]);
+		if (m_button.collsion(m_player[index]))
+		{
+			m_wall[10].setValues((wallTexture), (sf::Vector2f(15000, 11250)), (sf::Vector2f(0.05, 1.875)));
+
+		}
 	}
 	m_plate.collsion(m_player[0], m_player[1]);
 
 	// updates controller
 	m_controller.update();
+
+
+	if (m_plate.getPlateState())
+	{
+		m_wall[11].setValues((wallTexture), (sf::Vector2f(15000, 11250)), (sf::Vector2f(0.05, 1.875)));
+	}
+	else
+	{
+		m_wall[11].setValues((wallTexture), (sf::Vector2f(1500, 1125)), (sf::Vector2f(0.05, 1.875)));
+	}
+
+	if (m_winButton[0].getGlobalBounds().intersects(m_player[0].getSprite().getGlobalBounds()) && m_winButton[1].getGlobalBounds().intersects(m_player[1].getSprite().getGlobalBounds()))
+	{
+		m_text.setString("YOU WIN");
+		m_text.setOrigin(m_text.getLocalBounds().width / 2.0f, m_text.getLocalBounds().height / 2.0f);
+	}
+
+	
 
 }
 
@@ -83,12 +117,12 @@ void GameplayScreen::render(sf::RenderWindow & t_window)
 	}
 	m_button.render(t_window);
 	m_plate.render(t_window);
-	m_field.render(t_window);
 	for (int index = 0; index < NUMBER_OF_PLAYERS; index++)
 	{
 		m_player[index].render(t_window);
+		t_window.draw(m_winButton[index]);
 	}
-	m_wall.render(t_window);
+	t_window.draw(m_text);
 	t_window.draw(m_bPhone);
 	t_window.draw(m_gPhone);
 }
@@ -116,7 +150,10 @@ void GameplayScreen::loadTextures()
 	{
 		std::cout << "Error Loading Texture" << std::endl;
 	}
-
+	if (!m_font.loadFromFile("./ASSETS/FONTS/ariblk.ttf"))
+	{
+		std::cout << "Error Loading Menu Texture" << std::endl;
+	}
 	if(!buttonTexture[0].loadFromFile("./ASSETS/IMAGES/SwitchOnEmpty.png"))
 	{
 		std::cout << "Error Loading Texture" << std::endl;
@@ -141,15 +178,16 @@ void GameplayScreen::loadTextures()
 	{
 		std::cout << "Error Loading Texture" << std::endl;
 	}
-	if (!fieldTexture.loadFromFile("./ASSETS/IMAGES/FieldTexture.png"))
-	{
-		std::cout << "Error Loading Texture" << std::endl;
-	}
+	
 	if (!m_gPhoneTexture.loadFromFile("./ASSETS/IMAGES/GirlTexture1.png"))
 	{
 		std::cout << "Error Loading Texture" << std::endl;	
 	}
 	if (!m_bPhoneTexture.loadFromFile("./ASSETS/IMAGES/BoyTexture1.png"))
+	{
+		std::cout << "Error Loading Texture" << std::endl;
+	}
+	if (!m_winButtonTexture.loadFromFile("./ASSETS/IMAGES/Reciever.png"))
 	{
 		std::cout << "Error Loading Texture" << std::endl;
 	}
@@ -188,5 +226,7 @@ void GameplayScreen::setWallsValues()
 	m_wall[7].setValues((wallTexture), (sf::Vector2f(1975, 750)), (sf::Vector2f(0.125, 3.5)));
 	m_wall[8].setValues((wallTexture), (sf::Vector2f(1000, 750)), (sf::Vector2f(4.75, 0.125)));
 	m_wall[9].setValues((wallTexture), (sf::Vector2f(1000, 750)), (sf::Vector2f(0.125, 3.5)));
+	m_wall[10].setValues((wallTexture), (sf::Vector2f(500, 375)), (sf::Vector2f(0.05, 1.875)));
+	m_wall[11].setValues((wallTexture), (sf::Vector2f(1500, 1125)), (sf::Vector2f(0.05, 1.875)));
 
 }

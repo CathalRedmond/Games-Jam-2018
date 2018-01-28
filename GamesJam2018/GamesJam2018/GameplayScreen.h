@@ -52,7 +52,7 @@ private:
 
 	// textures for the player class
 	sf::Texture playerTexture[2];
-	static const int NUMBER_OF_WALLS = 10;
+	static const int NUMBER_OF_WALLS = 12;
 
 	sf::Texture fieldTexture;
 
@@ -67,6 +67,10 @@ private:
 
 	Field m_field;
 
+	sf::Sprite m_winButton[2];
+	sf::Texture m_winButtonTexture;
+	sf::Text m_text;
+	sf::Font m_font;
 	sf::Sprite m_bPhone;
 	sf::Sprite m_gPhone;
 	sf::Texture m_bPhoneTexture;

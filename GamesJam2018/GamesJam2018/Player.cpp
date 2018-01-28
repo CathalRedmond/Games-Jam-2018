@@ -86,7 +86,6 @@ bool Player::collisionDetection(Wall & m_wall)
 	if (m_playerSprite.getGlobalBounds().intersects(m_wall.getShape().getGlobalBounds()))
 	{
 		m_hit = true;
-		std::cout << "Ahhh!" << std::endl;
 	}
 	else
 	{
