@@ -63,6 +63,11 @@ private:
 	pressurePlates m_plate;
 
 	Field m_field;
+
+	sf::Sprite m_bPhone;
+	sf::Sprite m_gPhone;
+	sf::Texture m_bPhoneTexture;
+	sf::Texture m_gPhoneTexture;
 };
 
 #endif // !GAMEPLAYSCREEN_H
