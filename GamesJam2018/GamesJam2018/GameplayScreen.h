@@ -6,6 +6,7 @@
 #include "game.h"
 #include "Wall.h"
 #include "Player.h"
+#include "Field.h"
 #include "button.h"
 #include "pressurePlates.h"
 
@@ -53,7 +54,8 @@ private:
 	sf::Texture playerTexture[2];
 	static const int NUMBER_OF_WALLS = 10;
 
-	
+	sf::Texture fieldTexture;
+
 	// instance of wall class
 	Wall m_wall[NUMBER_OF_WALLS];
 
@@ -62,6 +64,13 @@ private:
 
 	// instance of pressure plate class
 	pressurePlates m_plate;
+
+	Field m_field;
+
+	sf::Sprite m_bPhone;
+	sf::Sprite m_gPhone;
+	sf::Texture m_bPhoneTexture;
+	sf::Texture m_gPhoneTexture;
 };
 
 #endif // !GAMEPLAYSCREEN_H

@@ -5,6 +5,7 @@
 #include "controller.h"
 #include "ScreenSize.h"
 #include "Wall.h"
+#include "Field.h"
 
 /// <summary>
 /// @brief player class
@@ -13,13 +14,17 @@ class Player
 {
 public:
 	Player();
+	Player(sf::Vector2f t_playerSpawn);
 	~Player();
 	void setTexture(sf::Texture &  t_playerTexture);
 	void update(Controller & t_controller);
 	void render(sf::RenderWindow & t_window);
 	sf::Sprite getSprite();
 	bool collisionDetection(Wall & t_wall);
+
+	void collisionDetection(Field & t_field);
 	void setPosition(sf::Vector2f t_playerPosition);
+	void setSpawn(sf::Vector2f t_playerSpawn);
 private:
 	void calculateAngle();
 	void handleControllerInput(Controller & t_controller);
@@ -39,6 +44,10 @@ private:
 
 	// direction player is facing
 	sf::Vector2f m_direction;
+
+	//The Place the Player spawns from
+	sf::Vector2f m_spawnPoint;
+
 
 	// bool for if the player has collide with a wall
 	bool m_hit{ false };

@@ -7,6 +7,12 @@ Player::Player()
 {
 }
 
+Player::Player(sf::Vector2f t_playerSpawn)
+{
+	m_spawnPoint = t_playerSpawn;
+	m_position = m_spawnPoint;
+}
+
 /// <summary>
 /// @brief basic destructor for the game
 /// </summary>
@@ -89,6 +95,15 @@ bool Player::collisionDetection(Wall & m_wall)
 	return m_hit;
 }
 
+void Player::collisionDetection(Field & t_field)
+{
+
+	if (m_playerSprite.getGlobalBounds().intersects(t_field.getSprite().getGlobalBounds()))
+	{
+		m_position = m_spawnPoint;
+	}
+}
+
 /// <summary>
 /// @brief sets player position
 /// </summary>
@@ -97,6 +112,12 @@ void Player::setPosition(sf::Vector2f t_playerPosition)
 {
 	m_position = t_playerPosition;
 	m_previousPosition = m_position;
+}
+
+void Player::setSpawn(sf::Vector2f t_playerSpawn)
+{
+	m_spawnPoint = t_playerSpawn;
+	m_position = m_spawnPoint;
 }
 
 
