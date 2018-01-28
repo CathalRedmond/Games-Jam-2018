@@ -14,24 +14,30 @@ public:
 
 	void render(sf::RenderWindow & t_window);
 
-	void setTexture(sf::Texture const plateTextureOn, sf::Texture const plateTextureOff);
+	void setTexture(sf::Texture const t_plateTextureOn, sf::Texture const t_plateTextureOff);
 	sf::Sprite getSprite();
-	void collsion(Player & t_player, Player & t_player2);
-	bool getState();
+	void collsion(Player & t_playerOne, Player & t_playerTwo);
+	bool getPlateState();
+	void setPosition(sf::Vector2f t_platePosition);
 
 private:
-	void setUpSprites();
-	bool plateOn{ false };
-	void changeButtonState();
-	int playertouching = 0;
-	bool active{ false };
+	void setUpSprite();
 
+	// bool for is plate is on or off
+	bool plateOn{ false };
+
+	// const for which texture the plate is
 	static const int PLATE_ON = 0;
 	static const int PLATE_OFF = 1;
 
+	// player sprite
 	sf::Sprite m_plateSprite;
 
+	// player textures
 	sf::Texture m_plateTexture[2];
+
+	// position of the plate
+	sf::Vector2f m_platePosition;
 };
 
 #endif // !PRESSUREPLATES_H

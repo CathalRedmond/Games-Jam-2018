@@ -3,7 +3,9 @@
 #include <iostream>
 
 
-
+/// <summary>
+/// @brief basic constructor for the game class
+/// </summary>
 Game::Game() :
 	m_window( sf::VideoMode{ ScreenSize::s_width, ScreenSize::s_height, 32 }, "SFML Game"),
 	m_exitGame{false} //when true game will exit
@@ -19,7 +21,9 @@ Game::~Game()
 
 }
 
-
+/// <summary>
+/// @brief main game loop
+/// </summary>
 void Game::run()
 {
 	sf::Clock clock;
@@ -41,7 +45,7 @@ void Game::run()
 /// <summary>
 /// handle user and system events/ input
 /// get key presses/ mouse moves etc. from OS
-/// and user :: Don't do game update here
+/// and user 
 /// </summary>
 void Game::processEvents()
 {
@@ -58,18 +62,19 @@ void Game::processEvents()
 			{
 				m_exitGame = true;
 			}
-			switch(m_currentScreen)
-			{
-			case currentScreen::Gameplay:
-				m_gameplayScreen->processEvents(event);
-				break;
-			case currentScreen::MainMenu:
-				m_menuScreen->processEvents(event);
-				break;
-			default:
-				break;
+			
 			}
 		}
+		switch (m_currentScreen)
+		{
+		case currentScreen::Gameplay:
+			m_gameplayScreen->processEvents(event);
+			break;
+		case currentScreen::MainMenu:
+			m_menuScreen->processEvents(event);
+			break;
+		default:
+			break;
 	}
 }
 
@@ -98,7 +103,7 @@ void Game::update(sf::Time t_deltaTime)
 }
 
 /// <summary>
-/// draw the frame and then switch bufers
+/// draw the frame and then switch buffers
 /// </summary>
 void Game::render()
 {

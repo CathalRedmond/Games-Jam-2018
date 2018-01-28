@@ -1,50 +1,66 @@
 #include "Wall.h"
 
+/// <summary>
+/// @brief basic constructor
+/// </summary>
 Wall::Wall()
 	
 {
 	
 }
 
+/// <summary>
+/// @brief basic destrcutor
+/// </summary>
 Wall::~Wall()
 {
 }
 
+/// <summary>
+/// @brief renders wall onto screen
+/// </summary>
+/// <param name="t_window">renderwindow used</param>
 void Wall::render(sf::RenderWindow & t_window)
 {
-	for (int index = 0; index < NUMBER_OF_PARTS_OF_THE_WALL; index++)
-	{
-		t_window.draw(wallSprite[index]);
-	}
+	t_window.draw(m_wallSprite);
 }
 
-void Wall::setTexture(sf::Texture const & t_wallTexture1, sf::Texture const & t_wallTexture2)
+/// <summary>
+/// @brief sets the texture of the wall
+/// </summary>
+/// <param name="t_wallTexture">wall texture</param>
+void Wall::setTexture(sf::Texture const & t_wallTexture)
 {
-	wallTexture[BOTTOM_PART] = t_wallTexture1;
-	wallTexture[TOP_PART] = t_wallTexture2;
-	setUpSprites();
+	m_wallTexture = t_wallTexture;
+ 	setUpSprites();
 }
 
-sf::Vector2f Wall::getPosition()
+
+/// <summary>
+/// @brief returns wall sprite
+/// </summary>
+/// <returns>wall sprite</returns>
+sf::Sprite Wall::getSprite()
 {
-	return wallSprite[0].getPosition();
+	return m_wallSprite;
 }
 
-sf::Sprite Wall::getSize()
+/// <summary>
+/// @brief sets wall position
+/// </summary>
+/// <param name="t_wallPosition">new wall position</param>
+void Wall::setPosition(sf::Vector2f t_wallPosition)
 {
-	return wallSprite[BOTTOM_PART];
+	m_wallPosition = t_wallPosition;
+	m_wallSprite.setPosition(m_wallPosition);
 }
 
+/// <summary>
+/// @brief sets up sprites position
+/// </summary>
 void Wall::setUpSprites()
 {
-	wallRect[BOTTOM_PART] = { 0,0,200,150 };
-	wallRect[TOP_PART] = { 0,0,180,130 };
-	for (int index = 0; index < NUMBER_OF_PARTS_OF_THE_WALL; index++)
-	{
-		wallSprite[index].setTexture(wallTexture[index]);
-		wallSprite[index].setTextureRect(wallRect[index]);
-		wallSprite[index].setOrigin(wallRect[index].width / 2.0f, wallRect[index].height / 2.0f);
-		wallSprite[index].setPosition(200, 200);
-	}
-	
+		m_wallSprite.setTexture(m_wallTexture);
+		m_wallSprite.setOrigin(m_wallSprite.getGlobalBounds().width / 2.0f, m_wallSprite.getGlobalBounds().height / 2.0f);
+		m_wallSprite.setPosition(m_wallPosition);	
 }

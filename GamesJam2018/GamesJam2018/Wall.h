@@ -4,34 +4,29 @@
 #include <SFML\graphics.hpp>
 
 
-
+/// <summary>
+/// @brief wall class
+/// </summary>
 class Wall
 {
 public:
 	Wall();
 	~Wall();
 	void render(sf::RenderWindow & t_window);
-	void setTexture(sf::Texture const & t_wallTexture1, sf::Texture const & t_wallTexture2);
-	sf::Vector2f getPosition();
-	sf::Sprite getSize();
+	void setTexture(sf::Texture const & t_wallTexture);
+	sf::Sprite getSprite();
+	void setPosition(sf::Vector2f t_wallPosition);
 private:
 	void setUpSprites();
 
-	static const int NUMBER_OF_PARTS_OF_THE_WALL = 2;
+	// position of the wall
+	sf::Vector2f m_wallPosition;
 
+	// wall sprite
+	sf::Sprite m_wallSprite;
 
-	sf::Sprite wallSprite[NUMBER_OF_PARTS_OF_THE_WALL];
-
-	sf::Texture wallTexture[NUMBER_OF_PARTS_OF_THE_WALL];
-
-	sf::IntRect wallRect[NUMBER_OF_PARTS_OF_THE_WALL];
-
-	static const int TOP_PART = 1;
-	static const int BOTTOM_PART = 0;
-
-
-	sf::Vector2f wallSize;
-	sf::Vector2f wallPosition;      
+	// wall texture
+	sf::Texture m_wallTexture;
 
 };
 

@@ -182,9 +182,9 @@ void Controller::update()
 
 
 		// checks if values are greater than threshold or minus threshold to determine 
-		// which directions on the dpad are activated
+		// which directions on the leftthumb stick are activated
 
-		// if x-axis greater than threshold than dpad pointing right and sets bool to true
+		// if x-axis greater than threshold than leftthumb stick pointing right and sets bool to true
 		if (sf::Joystick::getAxisPosition(sf_Joystick_index, sf::Joystick::X) > dpadThreshold)
 		{
 			m_currentState.LeftThumbStickRight = true;
@@ -194,7 +194,7 @@ void Controller::update()
 			m_currentState.LeftThumbStickRight = false;
 		}
 
-		// if x-axis less than minus threshold than dpad pointing left and sets bool to true
+		// if x-axis less than minus threshold than leftthumb stick pointing left and sets bool to true
 
 		if (sf::Joystick::getAxisPosition(sf_Joystick_index, sf::Joystick::X) < -dpadThreshold)
 		{
@@ -205,7 +205,7 @@ void Controller::update()
 			m_currentState.LeftThumbStickLeft = false;
 		}
 
-		// if y-axis greater than threshold than dpad pointing up and sets bool to true
+		// if y-axis greater than threshold than leftthumb stick pointing up and sets bool to true
 
 		if (sf::Joystick::getAxisPosition(sf_Joystick_index, sf::Joystick::Y) > dpadThreshold)
 		{
@@ -216,7 +216,7 @@ void Controller::update()
 			m_currentState.LeftThumbStickUp = false;
 		}
 
-		// if y-axis less than minus threshold than dpad pointing down and sets bool to true
+		// if y-axis less than minus threshold than leftthumb stick pointing down and sets bool to true
 
 		if (sf::Joystick::getAxisPosition(sf_Joystick_index, sf::Joystick::Y) < -dpadThreshold)
 		{
@@ -229,9 +229,9 @@ void Controller::update()
 
 
 		// checks if values are greater than threshold or minus threshold to determine 
-		// which directions on the dpad are activated
+		// which directions on the rightthumb stick are activated
 
-		// if x-axis greater than threshold than dpad pointing right and sets bool to true
+		// if x-axis greater than threshold than rightthumb stick pointing right and sets bool to true
 		if (sf::Joystick::getAxisPosition(sf_Joystick_index, sf::Joystick::U) > dpadThreshold)
 		{
 			m_currentState.RightThumbStickRight = true;
@@ -241,7 +241,7 @@ void Controller::update()
 			m_currentState.RightThumbStickRight = false;
 		}
 
-		// if x-axis less than minus threshold than dpad pointing left and sets bool to true
+		// if x-axis less than minus threshold than rightthumb stick pointing left and sets bool to true
 
 		if (sf::Joystick::getAxisPosition(sf_Joystick_index, sf::Joystick::U) < -dpadThreshold)
 		{
@@ -252,7 +252,7 @@ void Controller::update()
 			m_currentState.RightThumbStickLeft = false;
 		}
 
-		// if y-axis greater than threshold than dpad pointing up and sets bool to true
+		// if y-axis greater than threshold than rightthumb stick pointing up and sets bool to true
 
 		if (sf::Joystick::getAxisPosition(sf_Joystick_index, sf::Joystick::R) > dpadThreshold)
 		{
@@ -263,7 +263,7 @@ void Controller::update()
 			m_currentState.RightThumbStickUp = false;
 		}
 
-		// if y-axis less than minus threshold than dpad pointing down and sets bool to true
+		// if y-axis less than minus threshold than rightthumb stick pointing down and sets bool to true
 
 		if (sf::Joystick::getAxisPosition(sf_Joystick_index, sf::Joystick::R) < -dpadThreshold)
 		{

@@ -6,44 +6,51 @@
 #include "ScreenSize.h"
 #include "Wall.h"
 
+/// <summary>
+/// @brief player class
+/// </summary>
 class Player
 {
 public:
 	Player();
 	~Player();
-	
+	void setTexture(sf::Texture &  t_playerTexture);
 	void update(Controller & t_controller);
 	void render(sf::RenderWindow & t_window);
-	sf::RectangleShape getSprite();
-	void collisionDetection(Wall & m_wall);
+	sf::Sprite getSprite();
+	void collisionDetection(Wall & t_wall);
+	void setPosition(sf::Vector2f t_playerPosition);
 private:
-
 	void calculateAngle();
-
 	void handleControllerInput(Controller & t_controller);
-
 	void determineDirection(Controller & t_controller);
-
 	void movement(Controller & t_controller);
-
-	void boundaryCheck();
-	sf::Vector2f previousePosition;
-
+	void setUpSprite();
 	float radiansToDegrees(float t_radianAngle);
+
+	// previous position of the player - used for when player collides with wall
+	sf::Vector2f m_previousPosition;
+
+	// velocity of the player
+	sf::Vector2f m_velocity;
+
+	// position of the player
+	sf::Vector2f m_position;
+
+	// direction player is facing
+	sf::Vector2f m_direction;
+
+	// bool for if the player has collide with a wall
+	bool m_hit{ false };
 	
-	sf::Vector2f m_topLeftBoundary;
-	sf::Vector2f m_bottomRightBoundary;
+	// angle player sprite is facing
+	float m_rotationAngle;
 
-	sf::Vector2f velocity;
+	// player sprite
+	sf::Sprite m_playerSprite;
 
-	sf::Vector2f position;
-
-	sf::Vector2f direction;
-
-	bool hit{ false };
-	float rotationAngle;
-
-	sf::RectangleShape playerShape;
+	// player texture
+	sf::Texture  m_playerTexture;
 };
 
 

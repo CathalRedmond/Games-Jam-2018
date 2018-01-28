@@ -4,6 +4,9 @@
 #include <SFML\Graphics.hpp>
 #include "game.h"
 #include "controller.h"
+
+enum class currentScreen;
+
 class menuScreen
 {
 public:

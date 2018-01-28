@@ -3,14 +3,18 @@
 
 #include <SFML/Graphics.hpp>
 #include "ScreenSize.h"
-#include "Enums.h"
 #include "GameplayScreen.h"
 #include "menuScreen.h"
+#include "Enums.h"
 
 
+// forward referncing
 class GameplayScreen;
 class menuScreen;
 
+/// <summary>
+/// @brief class for the game
+/// </summary>
 class Game
 {
 public:
@@ -27,15 +31,20 @@ private:
 	void update(sf::Time t_deltaTime);
 	void render();
 	
+	// current screen the game is in
 	currentScreen m_currentScreen;
-	currentScreen *m_currentScreenToPass;
 
+	// instance of the gameplay screen in the game
 	GameplayScreen *m_gameplayScreen;
 
+	// instance of the menu screen in the game
 	menuScreen *m_menuScreen;
 
-	sf::RenderWindow m_window; // main SFML window
-	bool m_exitGame; // control exiting game
+	// main SFML window
+	sf::RenderWindow m_window; 
+
+	// control exiting game
+	bool m_exitGame; 
 
 };
 

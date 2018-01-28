@@ -1,8 +1,9 @@
 /// <summary>
-/// simple game loop for SFML[2.4.2]
+/// Puzzle game made for Game Jam 2018 where the user has to play as two 
+/// cell signals trying to transmit a text between two phones
 /// 
-/// @author Peter Lowe
-/// @date May 21017
+/// 
+/// uses a xbox controller to play - no keyboard support
 /// </summary>
 
 #ifdef _DEBUG 
@@ -30,6 +31,5 @@ int main()
 {
 	Game game;
 	game.run();
-
 	return 1;
 }

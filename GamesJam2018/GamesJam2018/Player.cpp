@@ -1,137 +1,188 @@
 #include "Player.h"
 
-
-
-
-
-
+/// <summary>
+/// @brief basic constructor for the game
+/// </summary>
 Player::Player()
 {
-	position = sf::Vector2f(ScreenSize::s_width / 2.0f, ScreenSize::s_width / 2.0f);
-	previousePosition = position;
-	playerShape.setSize(sf::Vector2f(50, 50));
-	playerShape.setFillColor(sf::Color::Cyan);
-	playerShape.setOrigin(playerShape.getGlobalBounds().width / 2.0f, playerShape.getGlobalBounds().height / 2.0f);
-	playerShape.setPosition(position);
 }
 
+/// <summary>
+/// @brief basic destructor for the game
+/// </summary>
 Player::~Player()
 {
 }
 
+/// <summary>
+/// @brief sets the texture of the player
+/// </summary>
+/// <param name="t_playerTexture">player texture</param>
+void Player::setTexture(sf::Texture &  t_playerTexture)
+{
+	m_playerTexture = t_playerTexture;
+	setUpSprite();
+
+}
+
+/// <summary>
+/// @brief update function for the player
+/// </summary>
+/// <param name="t_controller">controller in the game</param>
 void Player::update(Controller & t_controller)
 {
 	handleControllerInput(t_controller);
 
 	movement(t_controller);
 	
-	if (!hit)
+	// moves normal if not touching wall
+	if (!m_hit)
 	{
-		previousePosition = position;
-		position += velocity;
+		m_previousPosition = m_position;
+		m_position += m_velocity;
 		
 	}
-	else
+	else	// if touching wall player position changes to previous position
 	{
-		position = previousePosition;
+		m_position = m_previousPosition;
 	}
 
-	boundaryCheck();
 
-	playerShape.setPosition(position);
-	playerShape.setRotation(rotationAngle);
-
-	
+	m_playerSprite.setPosition(m_position);
+	m_playerSprite.setRotation(m_rotationAngle);
 }
 
+/// <summary>
+/// @brief renders player sprite onto screen
+/// </summary>
+/// <param name="t_window">renderwindow used on screen</param>
 void Player::render(sf::RenderWindow & t_window)
 {
-
-	t_window.draw(playerShape);
+	t_window.draw(m_playerSprite);
 }
 
-sf::RectangleShape Player::getSprite()
+/// <summary>
+/// @brief returns player sprite
+/// </summary>
+/// <returns>player sprite</returns>
+sf::Sprite Player::getSprite()
 {
-	return sf::RectangleShape(playerShape);
+	return (m_playerSprite);
 }
 
+/// <summary>
+/// @brief checks for collsion between player and wall
+/// </summary>
+/// <param name="m_wall">wall in the game</param>
 void Player::collisionDetection(Wall & m_wall)
 {
-	if (playerShape.getGlobalBounds().intersects(m_wall.getSize().getGlobalBounds()))
+	if (m_playerSprite.getGlobalBounds().intersects(m_wall.getSprite().getGlobalBounds()))
 	{
-		hit = true;
+		m_hit = true;
 	}
-	
 	else
 	{
-		hit = false; 
+		m_hit = false; 
 	}
 }
 
+/// <summary>
+/// @brief sets player position
+/// </summary>
+/// <param name="t_playerPosition">new position of player</param>
+void Player::setPosition(sf::Vector2f t_playerPosition)
+{
+	m_position = t_playerPosition;
+	m_previousPosition = m_position;
+}
 
 
-
-
-
+/// <summary>
+/// @brief calculates angle from direction
+/// </summary>
 void Player::calculateAngle()
 {
-	if (direction.x == 0)
+	// prevents division by zero later on
+	if (m_direction.x == 0)
 	{
-		if (direction.y > 0)
+		if (m_direction.y > 0)
 		{
-			rotationAngle = 90;
+			m_rotationAngle = 90;
 		}
 		else
 		{
-			rotationAngle = 270;
+			m_rotationAngle = 270;
 		}
 	}
 	else
 	{
-		bool negativeAngle = false;
-		if (direction.x < 0)
+		bool negativeAngle = false; // checks if angle is negative and helps to output corresponding positive angle
+		if (m_direction.x < 0)
 		{
 			negativeAngle = true;
 		}
-		rotationAngle = atan((direction.y / direction.x));
+		m_rotationAngle = atan((m_direction.y / m_direction.x));
 
-		rotationAngle = radiansToDegrees(rotationAngle);
+		m_rotationAngle = radiansToDegrees(m_rotationAngle);
 
 		if (negativeAngle)
 		{
-			rotationAngle += 180;
+			m_rotationAngle += 180;
 		}
 	}
 }
 
+/// <summary>
+/// @ brief  handles controller input
+/// </summary>
+/// <param name="t_controller">controller in the game</param>
 void Player::handleControllerInput(Controller & t_controller)
 {
 	determineDirection(t_controller);
 }
 
+/// <summary>
+/// @brief gets direction of player based on movement of the left thumb stick
+/// </summary>
+/// <param name="t_controller">controller in the game</param>
 void Player::determineDirection(Controller & t_controller)
 {
-	direction = sf::Vector2f(t_controller.m_currentState.LeftThumbStick.x * (90.0f/100), t_controller.m_currentState.LeftThumbStick.y* (90.0f / 100));
+	m_direction = sf::Vector2f(t_controller.m_currentState.LeftThumbStick.x * (90.0f/100), t_controller.m_currentState.LeftThumbStick.y* (90.0f / 100));
 	calculateAngle();
 }
 
+/// <summary>
+/// @brief sets velocity of player based on velocity
+/// </summary>
+/// <param name="t_controller">controller in the game</param>
 void Player::movement(Controller & t_controller)
 {
 	if (t_controller.m_currentState.RTrigger > 50)
 	{
-		velocity = direction / 10.0f;
+		m_velocity = m_direction / 10.0f;
 	}
 	else
 	{
-		velocity = sf::Vector2f(0.0, 0.0);
+		m_velocity = sf::Vector2f(0.0, 0.0);
 	}
 }
 
-void Player::boundaryCheck()
-{
 
+/// <summary>
+/// @brief sets up sprite used for the player
+/// </summary>
+void Player::setUpSprite()
+{
+	m_playerSprite.setTexture(m_playerTexture);
+	m_playerSprite.setOrigin(m_playerSprite.getGlobalBounds().width / 2.0f, m_playerSprite.getGlobalBounds().height / 2.0f);
+	m_playerSprite.setPosition(m_position);
 }
 
+/// <summary>
+/// @brief converts radians value to degrees
+/// </summary>
+/// <param name="t_radianAngle">angle in radians</param>
+/// <returns>angle in degrees</returns>
 float Player::radiansToDegrees(float t_radianAngle)
 {
 	return (t_radianAngle * (180.0f/ acos(-1.0f)));
