@@ -10,7 +10,7 @@ Game::Game() :
 	m_window( sf::VideoMode{ ScreenSize::s_width, ScreenSize::s_height, 32 }, "SFML Game"),
 	m_exitGame{false} //when true game will exit
 {
-	m_currentScreen = currentScreen::Gameplay;
+	m_currentScreen = currentScreen::MainMenu;
 	m_gameplayScreen = new GameplayScreen;
 	m_menuScreen = new menuScreen(m_currentScreen);
 }

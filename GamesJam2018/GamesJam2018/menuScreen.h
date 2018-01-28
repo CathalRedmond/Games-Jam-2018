@@ -16,7 +16,7 @@ public:
 	void update();
 	void render(sf::RenderWindow & t_window);
 	void processEvents(sf::Event & t_event);
-	void loadTextures();
+	void loadTexturesAndFonts();
 	void handleControllerInput();
 private:
 	sf::Sprite m_menuSprite;
@@ -25,7 +25,9 @@ private:
 	currentScreen &m_currentScreen;
 
 	int m_timer;
-	
+	sf::Font m_font;
+
+	sf::Text m_text;
 
 	Controller m_controller;
 };
